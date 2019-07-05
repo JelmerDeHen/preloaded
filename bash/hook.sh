@@ -1,4 +1,16 @@
 #!/bin/bash
+# This script mutates the shell execution environment by creating functions for files on $PATH
+# A shell will first look for an alias, then a function and then look for the file on the $PATH.
+# By requesting priority through the declaration of a function by the name of the file on the PATH it mitm's the flow
+
+# mkdir -pv /tmp/bin; cp $(which id) /tmp/bin; cd /tmp/bin ; export PATH=/tmp/bin ; alias id='printf "ALIAS\n"' ; id () { printf "FUNCTION\n"; }
+# id
+# <ALIAS
+# unalias id; id
+# <FUNCTION
+# id
+# <uid=0(root) gid=0(root) groups=0(root)
+
 # Testing:
 # docker run --rm -ti --mount type=bind,source="${PWD}/hook.sh",target=/hook.sh -- $(docker build -q .)
 # . ./hook.sh
