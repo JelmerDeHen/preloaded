@@ -1,1 +1,1 @@
-A place snips are collected concerning methods related to/about cross context execution
+A place snips are collected concerning methods related to cross context execution
