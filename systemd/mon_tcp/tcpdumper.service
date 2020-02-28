@@ -1,0 +1,9 @@
+[Service]
+Type=simple
+# -nn = Dont convert proto/port to names
+# -i = interface
+# -s0 = set snap length (packet size to capture) to unlimited (capture all the traffic)
+# -U = pcap_dump_flush() - we want results right after receiving and tcpdump should not buffer internally
+# -w /mnt/2/dns/trace-%m-%d-%H-%M-%S-%s = write to m/d/h/m/s/s
+# -G 600 = rotate every 10 (60*10 seconds) mins
+ExecStart=/usr/bin/tcpdump -nn -i eth0 -s0 -U -w /mnt/2/pcap/53/saskia.53.%%Y%%m%%d.%%H%%M.pcap -G 600 port 53
