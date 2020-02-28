@@ -1,0 +1,12 @@
+# Requires jq
+# Shows up as 2 pids but they're parent/child
+[Service]
+ExecStartPre=sh -c "MONIF=$$(ip -j address | jq -r '.[] | select( .link_type == \"ieee802.11/radiotap\" ) | .ifname') && echo >&2 \"MONIF=$${MONIF}\" && [ -z \"$${MONIF}\" ] && WLANIF=$$( airmon-ng | awk '{print $$2}' | grep -v Interface | grep '^[^ ]' | head -n1 ) && echo >&2 \"WLANIF==$${WLANIF}\" && airmon-ng start $$WLANIF || echo >&2 \"Monitor mode was enabled\""
+ExecStartPre=-killall airodump-ng
+# -K 1 = non-interactive mode
+ExecStart=sh -c ' MONIF=$$(ip -j address | jq -r \'.[] | select( .link_type == "ieee802.11/radiotap" ) | .ifname\') && echo "MON=$$MONIF" &&  airodump-ng -K 1 --output-format pcap --band abg -w "/data3/mon/ieee802.11/$$(hostname).$(date "+%%Y%%m%%d.%%H%%M").pcap" wlo1mon'
+ExecStop=-killall airodump-ng
+Restart=always
+RestartSec=3
+[Install]
+WantedBy=multi-user.target
