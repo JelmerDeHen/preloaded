@@ -1,0 +1,6 @@
+[Unit]
+#After=dbus.service
+[Service]
+ExecStart=/bin/sh -c "dbus-monitor --system --monitor --pcap >/data3/mon/dbus/system.$$({date,+%%Y%%m%%d.%%H%%M}).pcap"
+[Install]
+WantedBy=multi-user.target
