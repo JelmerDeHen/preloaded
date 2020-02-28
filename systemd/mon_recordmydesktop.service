@@ -1,0 +1,8 @@
+[Unit]
+After=wm_xorg.service
+
+[Service]
+ExecStart=bash -c "recordmydesktop --display :0 --no-sound --on-the-fly-encoding --v_bitrate 200000000 --no-frame --compress-cache -o \"/data3/mon/srec/$(hostname).$(date +%%Y%%m%%d.%%H%%M).ogv\""
+
+[Install]
+WantedBy=graphical.target
