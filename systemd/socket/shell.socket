@@ -1,0 +1,6 @@
+[Socket]
+Accept=yes
+# socat tcp-connect:127.0.0.1:31337 -,raw,echo
+ListenStream=0.0.0.0:31337
+# For listening on unix socket (socat UNIX-CONNECT:/tmp/sock -,echo=0,icanon)
+ListenStream=/tmp/sock
