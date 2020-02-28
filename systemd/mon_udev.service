@@ -1,0 +1,4 @@
+[Service]
+ExecStart=/bin/sh -c "udevadm monitor -kup >/data3/mon/udev/$$({date,+%%Y%%m%%d.%%H%%M})"
+[Install]
+WantedBy=multi-user.target
